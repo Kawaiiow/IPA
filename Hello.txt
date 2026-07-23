@@ -4,5 +4,8 @@ Hi
 # python -m venv <Name>
 # start -> <Name>\Script\activate
 
-ssh -o KexAlgorithms=diffie-hellman-group14-sha1 -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedKeyTypes=+ssh-rsa -i 
-<PATH TO PRI KEY> NAME@IP
+ssh -o KexAlgorithms=diffie-hellman-group14-sha1 -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedKeyTypes=+ssh-rsa 
+-i <PATH TO PRI KEY> NAME@IP -p Port <Router>
+
+#ssh -o KexAlgorithms=diffie-hellman-group14-sha1 -o HostKeyAlgorithms=+ssh-rsa -o PubkeyAcceptedKeyTypes=+ssh-rsa -o MACs=hmac-sha1 
+-i <PATH TO PRI KEY> admin@Router(IP) -p Port <SW>

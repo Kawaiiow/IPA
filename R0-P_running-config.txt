@@ -1,0 +1,27 @@
+sh run
+Building configuration...
+
+  
+Current configuration : 3981 bytes
+!
+! Last configuration change at 13:46:56 UTC Thu Jul 23 2026
+!
+version 15.7
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname R0-P
+!
+boot-start-marker
+boot-end-marker
+!
+!
+vrf definition Management
+ !
+ address-family ipv4
+ exit-address-family
+!
+!
+no aaa new-model
+ --More-- 

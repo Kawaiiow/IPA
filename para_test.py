@@ -4,7 +4,7 @@ import time
 print("Step 0: Script started", flush=True)
 
 # ==== แก้ตรงนี้ให้ตรงกับ router ของคุณ ====
-ip = "192.168.1.40"
+ip = "192.168.1.41"
 username = "admin"
 key_path = r"C:\Users\USER\Desktop\IPA_LAB\IPA_3\IPA\id_rsa"
 # ==========================================
