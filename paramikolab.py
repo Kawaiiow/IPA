@@ -9,7 +9,7 @@ devices = [
     {"name": "R1-P", "host": "192.168.1.41", "port": 2222, "username": "admin"},
     {"name": "R2-P", "host": "192.168.1.41", "port": 2223, "username": "admin"},
     {"name": "S0-P", "host": "192.168.1.41", "port": 2224, "username": "admin"},
-    {"name": "S1-P", "host": "192.168.1.41", "port": 2225, "username": "admin"},
+    {"name": "S1-P", "host": "192.168.1.41", "port": 2225, "username": "admin"}
 ]
 
 private_key = paramiko.RSAKey.from_private_key_file(key_path)
