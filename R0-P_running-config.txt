@@ -2,9 +2,7 @@ sh run
 Building configuration...
 
   
-Current configuration : 3981 bytes
-!
-! Last configuration change at 13:46:56 UTC Thu Jul 23 2026
+Current configuration : 3919 bytes
 !
 version 15.7
 service timestamps debug datetime msec
@@ -24,4 +22,6 @@ vrf definition Management
 !
 !
 no aaa new-model
+!
+!
  --More-- 
