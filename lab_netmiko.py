@@ -24,6 +24,8 @@ S1_P_Config =[
     "interface range GigabitEthernet0/1-2",
     "switchport access vlan 101",
     "exit",
+
+    "do wr",
 ]
 
 R1_P_Config = [
@@ -33,12 +35,11 @@ R1_P_Config = [
     "exit",
     "router ospf 1 vrf Control-Data",
     "network 172.31.49.0 0.0.0.15 area 0",
+    "network 172.31.49.32 0.0.0.15 area 0",
     "network 172.31.49.16 0.0.0.3 area 0",
-    "network 1.1.1.1 0.0.0.0 area 0",
+    "network 1.1.1.1 0.0.0.0 area 0",  
 
-    # "access-list 101 deny tcp host 172.31.49.10 host 172.31.49.6",
-    # "access-list 101 deny tcp host 172.31.49.10 host 172.31.49.6"
-
+    "do wr",
 ]
 
 R2_P_Config = [
@@ -63,12 +64,26 @@ R2_P_Config = [
     "ip nat outside",
     "exit",
 
-    "ip route vrf Control-Data 0.0.0.0 0.0.0.0 192.168.42.1 global",
+    "ip route vrf Control-Data 0.0.0.0 0.0.0.0 192.168.123.1 global", #Warning NAT IP Changed
     "access-list 1 permit 172.31.49.0 0.0.0.255",
     "ip nat inside source list 1 interface GigabitEthernet0/3 vrf Control-Data overload",
-    "ip dns-server",
+    "ip dns server",
     "ip domain-lookup",
     "ip name-server 8.8.8.8",
+
+    "access-list 101 deny tcp host 172.31.49.11 host 172.31.49.9 eq 22",
+    "access-list 101 deny tcp host 172.31.49.11 host 172.31.49.9 eq 23",
+    "access-list 101 deny tcp host 172.31.49.11 172.31.49.16 0.0.0.3 eq 22",
+    "access-list 101 deny tcp host 172.31.49.11 172.31.49.16 0.0.0.3 eq 23",
+    "access-list 101 deny tcp host 172.31.49.11 172.31.49.32 0.0.0.15 eq 22",
+    "access-list 101 deny tcp host 172.31.49.11 172.31.49.32 0.0.0.15 eq 23",
+    "access-list 101 permit ip any any",
+
+    "int g0/2",
+    "ip access-group 101 in",
+    "exit",
+
+    "do wr",
 ]
 
 def run_command(device, cmd):
