@@ -33,8 +33,44 @@ R1_P_Config = [
     "exit",
     "router ospf 1 vrf Control-Data",
     "network 172.31.49.0 0.0.0.15 area 0",
+    "network 172.31.49.16 0.0.0.3 area 0",
     "network 1.1.1.1 0.0.0.0 area 0",
+
+    # "access-list 101 deny tcp host 172.31.49.10 host 172.31.49.6",
+    # "access-list 101 deny tcp host 172.31.49.10 host 172.31.49.6"
+
 ]
+
+R2_P_Config = [
+    "int loopback 1",
+    "ip vrf forwarding Control-Data",
+    "ip address 2.2.2.2 255.255.255.255",
+    "exit",
+
+    "router ospf 1 vrf Control-Data",
+    "network 172.31.49.0 0.0.0.15 area 0",
+    "network 172.31.49.16 0.0.0.3 area 0",
+    "network 2.2.2.2 0.0.0.0 area 0",
+    "default-information originate", #Advise Default Route to ospf
+    "exit",
+
+    # "ip route 0.0.0.0 0.0.0.0 GigabitEthernet0/3",
+    "int range g0/1-2",
+    "ip nat inside",
+    "exit",
+
+    "int g0/3",
+    "ip nat outside",
+    "exit",
+
+    "ip route vrf Control-Data 0.0.0.0 0.0.0.0 192.168.42.1 global",
+    "access-list 1 permit 172.31.49.0 0.0.0.255",
+    "ip nat inside source list 1 interface GigabitEthernet0/3 vrf Control-Data overload",
+    "ip dns-server",
+    "ip domain-lookup",
+    "ip name-server 8.8.8.8",
+]
+
 def run_command(device, cmd):
     device_name = device.pop("name")
     conn_params = {**static, **device}
@@ -65,6 +101,8 @@ if __name__ == "__main__":
             run_command(device, S1_P_Config)
         elif device["name"] == "R1-P":
             run_command(device, R1_P_Config)
+        elif device["name"] == "R2-P":
+                    run_command(device, R2_P_Config)
 # if __name__ == "__main__":
 #     for device in device_list:
 #         run_command(device, "show ip interface brief")
