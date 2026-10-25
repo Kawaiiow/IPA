@@ -3,3 +3,7 @@ id_rsa.ppk
 *.pem
 *.key
 *.pub
+__pycache__/
+*.py[cod]
+backups/
+
